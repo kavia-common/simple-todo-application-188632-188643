@@ -23,12 +23,14 @@ You can inspect the application DB todo_backend/todo.db without modifying it. Ch
 1) Using sqlite3 (recommended for quick read-only checks):
    - Command format: sqlite3 "<path-to-db>" "SQL_STATEMENT"
    - Examples:
+     - Health check (via API):
+       curl -s http://localhost:3001/ | jq .
+     - Recent todos:
+       sqlite3 "simple-todo-application-188632-188641/todo_backend/todo.db" "SELECT id,title,completed,created_at,updated_at FROM todos ORDER BY id DESC LIMIT 10;"
      - List tables:
        sqlite3 "simple-todo-application-188632-188641/todo_backend/todo.db" "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%';"
      - Show schema for a table (replace todos with your table name):
        sqlite3 "simple-todo-application-188632-188641/todo_backend/todo.db" ".schema todos"
-     - Query data:
-       sqlite3 "simple-todo-application-188632-188641/todo_backend/todo.db" "SELECT * FROM todos LIMIT 10;"
 
 2) Using the provided db_shell.py (works by default with sample myapp.db, can be pointed to the app DB):
    - Default (sample DB): python database/db_shell.py
