@@ -49,8 +49,9 @@ Verifying data persistence across backend restarts
 - Add or modify a todo via the app.
 - Stop and restart the backend.
 - Re-open todo_backend/todo.db (via sqlite3 or the shell copy approach above) and confirm your changes persist.
-  Example check:
+  Example checks (run one at a time):
   sqlite3 "simple-todo-application-188632-188641/todo_backend/todo.db" "SELECT COUNT(*) FROM todos;"
+  sqlite3 "simple-todo-application-188632-188641/todo_backend/todo.db" "SELECT id,title,completed FROM todos ORDER BY id DESC LIMIT 10;"
 
 Back up and restore
 - The provided scripts backup_db.sh and restore_db.sh target the sample DB (myapp.db) by default.
